@@ -1,4 +1,5 @@
-# exam-service — Radiology Workflow Backend (WIP)
+# exam-service-app: Radiology Workflow Backend (WIP)
+Backend project modeling a real radiology workflow with Spring Boot/JPA/Oracle, evolving toward Spring Cloud microservices. Built to deepen production-level Java skills.
 
 > 🚧 **Status: actively in development.** This is a personal learning project I'm building incrementally to deepen my backend engineering skills, drawing on my background in radiology support/workflows. I'm documenting progress here as I go — expect commits most days.
 
