@@ -1,5 +1,6 @@
 package com.medapp.exam_service.exam;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.medapp.exam_service.modality.Modality;
 import com.medapp.exam_service.patient.Patient;
 import jakarta.persistence.*;
@@ -24,6 +25,7 @@ public class Exam {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
     @ToString.Exclude
+    @JsonBackReference
     private Patient patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
