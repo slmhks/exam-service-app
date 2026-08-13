@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build and run tests
+        # SanityIT and ExamServiceApplicationTests are excluded here because both
+        # boot the full Spring context and connect to a real Oracle instance
+        # (via Docker) that doesn't exist in this CI runner.
+        # TODO: reinstate once Testcontainers is added (spins up a disposable
+        # Oracle container during the CI run itself) — tracked as a pending item.
+        run: ./mvnw clean verify -Dsurefire.failIfNoSpecifiedTests=false -Dtest="!SanityIT,!ExamServiceApplicationTests" -DfailIfNoTests=false

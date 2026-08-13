@@ -1,5 +1,7 @@
 package com.medapp.exam_service.patient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.medapp.exam_service.exam.Exam;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,6 +39,7 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     @ToString.Exclude
+    @JsonManagedReference
     private List<Exam> exams = new ArrayList<>();
 
 }

@@ -1,5 +1,4 @@
-# exam-service-app: Radiology Workflow Backend (WIP)
-Backend project modeling a real radiology workflow with Spring Boot/JPA/Oracle, evolving toward Spring Cloud microservices. Built to deepen production-level Java skills.
+# exam-service-app — Radiology Workflow Backend (WIP)
 
 > 🚧 **Status: actively in development.** This is a personal learning project I'm building incrementally to deepen my backend engineering skills, drawing on my background in radiology support/workflows. I'm documenting progress here as I go — expect commits most days.
 
@@ -46,8 +45,8 @@ I'm a backend-leaning developer with a support/troubleshooting background, worki
 
 | Date | Milestone |
 |------|-----------|
-| _(fill in)_ | Project scaffolded, Oracle connected via Docker, base entities (`Patient`, `Exam`, `Modality`) modeled with JPA relationships |
-| _(fill in)_ | Repository layer with Spring Data JPA, verified against real Oracle instance via integration test |
+| Aug 11, 2026 | Project scaffolded (Spring Boot 3, Java 21), Oracle connected via Docker, base entities (`Patient`, `Exam`, `Modality`) modeled with JPA relationships. Repository layer added with Spring Data JPA, verified against a real Oracle instance via integration test. |
+| Aug 12, 2026 | Service layer with workflow transition logic (arrival → check-in → room entry → in progress → images captured → completed), REST controller with versioned endpoints, global exception handling (404/409). Debugged and fixed two real issues: Jackson infinite recursion on bidirectional JPA relationships, and Hibernate lazy-proxy serialization failure. |
 
 _(This table will grow as the project progresses — see commit history for day-to-day detail.)_
 
