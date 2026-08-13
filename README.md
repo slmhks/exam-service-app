@@ -47,6 +47,7 @@ I'm a backend-leaning developer with a support/troubleshooting background, worki
 |------|-----------|
 | Aug 11, 2026 | Project scaffolded (Spring Boot 3, Java 21), Oracle connected via Docker, base entities (`Patient`, `Exam`, `Modality`) modeled with JPA relationships. Repository layer added with Spring Data JPA, verified against a real Oracle instance via integration test. |
 | Aug 12, 2026 | Service layer with workflow transition logic (arrival → check-in → room entry → in progress → images captured → completed), REST controller with versioned endpoints, global exception handling (404/409). Debugged and fixed two real issues: Jackson infinite recursion on bidirectional JPA relationships, and Hibernate lazy-proxy serialization failure. |
+| Aug 13, 2026 | Patient creation endpoint (`POST /api/v1/patients`) built with a proper DTO layer (request/response objects separate from JPA entities), Bean Validation, a dedicated mapper class, and global validation error handling returning per-field messages. Implemented the Builder pattern by hand first to understand the mechanics, then migrated to Lombok's `@Builder`. |
 
 _(This table will grow as the project progresses — see commit history for day-to-day detail.)_
 
