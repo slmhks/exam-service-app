@@ -22,8 +22,9 @@ jobs:
           cache: maven
 
       - name: Build and run tests
-        # SanityIT is excluded here because it connects to a real Oracle instance
-        # (via Docker) that doesn't exist in this CI runner yet.
+        # SanityIT and ExamServiceApplicationTests are excluded here because both
+        # boot the full Spring context and connect to a real Oracle instance
+        # (via Docker) that doesn't exist in this CI runner.
         # TODO: reinstate once Testcontainers is added (spins up a disposable
         # Oracle container during the CI run itself) — tracked as a pending item.
-        run: ./mvnw clean verify -Dsurefire.failIfNoSpecifiedTests=false -Dtest="!SanityIT" -DfailIfNoTests=false
+        run: ./mvnw clean verify -Dsurefire.failIfNoSpecifiedTests=false -Dtest="!SanityIT,!ExamServiceApplicationTests" -DfailIfNoTests=false
