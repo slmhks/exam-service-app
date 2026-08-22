@@ -1,4 +1,4 @@
-# exam-service-app — Radiology Workflow Backend (WIP)
+# exam-service — Radiology Workflow Backend (WIP)
 
 > 🚧 **Status: actively in development.** This is a personal learning project I'm building incrementally to deepen my backend engineering skills, drawing on my background in radiology support/workflows. I'm documenting progress here as I go — expect commits most days.
 
@@ -28,7 +28,7 @@ I'm a backend-leaning developer with a support/troubleshooting background, worki
 **Architecture & Patterns**
 - Layered architecture (entity / repository / service / controller / DTO)
 - SOLID principles, Clean Code practices
-- Design patterns surfaced through real features (Strategy, Builder, Observer, State, Factory, Decorator, Adapter, Template Method, Chain of Responsibility, Proxy) — in progress
+- Design patterns surfaced through real features — **implemented**: Builder (hand-rolled, then Lombok), Mapper/Assembler; **planned**: Strategy, Observer, State, Factory, Decorator, Adapter, Template Method, Chain of Responsibility, Proxy
 
 **Planned — Microservices & Cloud-Native**
 - Service split: Patient / Exam / Modality services
@@ -48,6 +48,7 @@ I'm a backend-leaning developer with a support/troubleshooting background, worki
 | Aug 11, 2026 | Project scaffolded (Spring Boot 3, Java 21), Oracle connected via Docker, base entities (`Patient`, `Exam`, `Modality`) modeled with JPA relationships. Repository layer added with Spring Data JPA, verified against a real Oracle instance via integration test. |
 | Aug 12, 2026 | Service layer with workflow transition logic (arrival → check-in → room entry → in progress → images captured → completed), REST controller with versioned endpoints, global exception handling (404/409). Debugged and fixed two real issues: Jackson infinite recursion on bidirectional JPA relationships, and Hibernate lazy-proxy serialization failure. |
 | Aug 13, 2026 | Patient creation endpoint (`POST /api/v1/patients`) built with a proper DTO layer (request/response objects separate from JPA entities), Bean Validation, a dedicated mapper class, and global validation error handling returning per-field messages. Implemented the Builder pattern by hand first to understand the mechanics, then migrated to Lombok's `@Builder`. |
+| Aug 22, 2026 | Completed core CRUD: Modality creation/listing (`POST`/`GET /api/v1/modalities`) using the established DTO/mapper/service/controller template. Exam creation (`POST /api/v1/exams`) added — the most complex slice yet, looking up existing `Patient` and `Modality` by ID, composing a nested response DTO from three separate mappers, and introducing two new domain-specific 404 exceptions. Full happy-path and error-path coverage verified in Postman. |
 
 _(This table will grow as the project progresses — see commit history for day-to-day detail.)_
 
