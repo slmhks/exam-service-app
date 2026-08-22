@@ -1,4 +1,4 @@
-# exam-service — Radiology Workflow Backend (WIP)
+# exam-service-app — Radiology Workflow Backend (WIP)
 
 > 🚧 **Status: actively in development.** This is a personal learning project I'm building incrementally to deepen my backend engineering skills, drawing on my background in radiology support/workflows. I'm documenting progress here as I go — expect commits most days.
 
