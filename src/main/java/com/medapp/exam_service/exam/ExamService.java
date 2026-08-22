@@ -1,5 +1,11 @@
 package com.medapp.exam_service.exam;
 
+import com.medapp.exam_service.modality.Modality;
+import com.medapp.exam_service.modality.ModalityNotFoundException;
+import com.medapp.exam_service.modality.ModalityRepository;
+import com.medapp.exam_service.patient.Patient;
+import com.medapp.exam_service.patient.PatientNotFoundException;
+import com.medapp.exam_service.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +15,29 @@ import java.time.LocalDateTime;
 public class ExamService {
 
     private final ExamRepository examRepository;
+    private final PatientRepository patientRepository;
+    private final ModalityRepository modalityRepository;
 
     @Autowired
-    public ExamService(ExamRepository examRepository) {
+    public ExamService(
+            ExamRepository examRepository,
+            PatientRepository patientRepository,
+            ModalityRepository modalityRepository) {
         this.examRepository = examRepository;
+        this.patientRepository = patientRepository;
+        this.modalityRepository = modalityRepository;
+    }
+
+    public ExamResponseDto createExam(CreateExamRequestDto request) {
+        Patient patient = this.patientRepository.findById(request.getPatientId())
+                .orElseThrow(() -> new PatientNotFoundException(request.getPatientId()));
+
+        Modality modality = this.modalityRepository.findById(request.getModalityId())
+                .orElseThrow(() -> new ModalityNotFoundException(request.getModalityId()));
+
+        Exam exam = ExamMapper.toEntity(request, patient, modality);
+        Exam saved = this.examRepository.save(exam);
+        return ExamMapper.toResponse(saved);
     }
 
     public Exam checkIn(Long examId) {
