@@ -1,10 +1,9 @@
 package com.medapp.exam_service.exam;
 
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/exams")
@@ -14,6 +13,12 @@ public class ExamController {
 
     public ExamController(ExamService examService) {
         this.examService = examService;
+    }
+
+    @PostMapping
+    public ResponseEntity<ExamResponseDto> createExam(@Valid @RequestBody CreateExamRequestDto request) {
+        ExamResponseDto examResponseDto = this.examService.createExam(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(examResponseDto);
     }
 
     @PostMapping("/{examId}/check-in")
